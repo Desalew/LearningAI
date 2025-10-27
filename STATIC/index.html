@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Agentic AI Assistant</title>
+</head>
+<body>
+  <h2>Agentic AI Assistant</h2>
+  <input type="text" id="inputText" placeholder="Enter something..." style="width: 300px;">
+  <button onclick="sendData()">Run</button>
+
+  <p>Response:</p>
+  <pre id="output" style="border:1px solid #ccc; padding:10px; width: 320px;"></pre>
+
+  <script>
+    async function sendData() {
+      const text = document.getElementById('inputText').value;
+      const res = await fetch('/process', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ text })
+      });
+      const data = await res.json();
+      document.getElementById('output').innerText = data.result;
+    }
+  </script>
+</body>
+</html>
